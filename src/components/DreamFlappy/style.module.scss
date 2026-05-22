@@ -54,6 +54,10 @@
   box-shadow: var(--glow-blue);
   line-height: 0;
   background: #f0f8ff;
+
+  @media (min-width: 768px) and (min-height: 700px) {
+    max-width: min(600px, calc(75vh * 480 / 640));
+  }
 }
 
 .canvas {

@@ -8,12 +8,12 @@ import { useCanvasScale } from '../../lib/useCanvasScale'
 
 const W = 480
 const H = 640
-const GRAVITY = 0.5
-const JUMP = -9
+const GRAVITY = 0.35
+const JUMP = -8.5
 const PIPE_WIDTH = 64
-const PIPE_GAP = 160
-const PIPE_SPEED = 3
-const PIPE_INTERVAL = 1600 // ms
+const PIPE_GAP = 190
+const PIPE_SPEED = 2.5
+const PIPE_INTERVAL = 1900 // ms
 
 function randomChar() {
   return characters[Math.floor(Math.random() * characters.length)]
@@ -160,7 +160,7 @@ export default function DreamFlappy() {
       g.pipes = g.pipes.filter(p => p.x + PIPE_WIDTH > 0)
 
       // collision — ceiling / floor
-      if (g.bird.y - 20 < 0 || g.bird.y + 20 > H) {
+      if (g.bird.y - 16 < 0 || g.bird.y + 16 > H) {
         g.alive = false
         endGame(g.score)
         return
@@ -170,9 +170,9 @@ export default function DreamFlappy() {
       for (const p of g.pipes) {
         const bx = g.bird.x
         const by = g.bird.y
-        const inX = bx + 18 > p.x && bx - 18 < p.x + PIPE_WIDTH
-        const inTop = by - 18 < p.top
-        const inBot = by + 18 > p.top + PIPE_GAP
+        const inX = bx + 14 > p.x && bx - 14 < p.x + PIPE_WIDTH
+        const inTop = by - 14 < p.top
+        const inBot = by + 14 > p.top + PIPE_GAP
         if (inX && (inTop || inBot)) {
           g.alive = false
           endGame(g.score)
