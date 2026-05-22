@@ -1,0 +1,34 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.track {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+.label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  color: var(--c-text-lo);
+}
+
+/* Accent variants */
+.green .fill { background: var(--c-accent); box-shadow: var(--glow-green); }
+.purple .fill { background: var(--c-purple); box-shadow: var(--glow-purple); }

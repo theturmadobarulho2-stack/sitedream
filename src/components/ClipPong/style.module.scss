@@ -1,0 +1,278 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background: var(--c-bg-1);
+  min-height: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--c-blue-deep);
+  margin: 0;
+}
+
+.sub {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--c-blue);
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
+.gameArea {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 800 / 500;
+  max-height: calc(100% - 80px);
+  margin: auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--glow-blue);
+  background: #f0f6ff;
+}
+
+/* YouTube iframes — background layer */
+.iframes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.iframeHalf {
+  flex: 1;
+  overflow: hidden;
+  opacity: 0.18;
+  transition: opacity 0.35s ease;
+
+  &.iframeActive {
+    opacity: 0.55;
+  }
+}
+
+.ytDiv {
+  width: 100%;
+  height: 100%;
+
+  iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    pointer-events: none;
+  }
+}
+
+/* Canvas — above iframes */
+.canvas {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: none;
+}
+
+/* Overlays */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(240,244,255,0.88);
+  backdrop-filter: blur(6px);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.overlayLight {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(240,244,255,0.7);
+  backdrop-filter: blur(3px);
+}
+
+/* Idle overlay */
+.pongTitle {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--c-blue-deep);
+  margin: 0;
+}
+
+.pongDesc {
+  font-size: 14px;
+  color: var(--c-text-lo);
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.pongHint {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--c-text-mut);
+  margin: 0;
+}
+
+/* Match transition */
+.transMsg {
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--c-blue-deep);
+  margin: 0;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Game over */
+.goTitle {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--c-blue-deep);
+  margin: 0;
+}
+
+.goSub {
+  font-size: 16px;
+  color: var(--c-text-lo);
+  margin: 0;
+}
+
+.goMini {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--c-blue);
+  margin: 0;
+}
+
+/* Champion */
+.champTitle {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--c-accent-yellow);
+  margin: 0;
+}
+
+.champSub {
+  font-size: 15px;
+  color: var(--c-text-lo);
+  margin: 0;
+}
+
+/* Landscape warning */
+.rotateWarning {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(240,244,255,0.97);
+  backdrop-filter: blur(12px);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--c-blue);
+
+  svg {
+    opacity: 0.85;
+    animation: rotateHint 2.2s ease-in-out infinite;
+  }
+
+  p {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: var(--c-blue-deep);
+    margin: 0;
+  }
+
+  span {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--c-text-mut);
+  }
+}
+
+@keyframes rotateHint {
+  0%, 100% { transform: rotate(0deg); }
+  40%       { transform: rotate(90deg); }
+  60%       { transform: rotate(90deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Pause overlay */
+.pauseOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(240,244,255,0.7);
+  backdrop-filter: blur(4px);
+}
+
+.pauseLabel {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--c-blue-deep);
+  margin: 0;
+}
+
+.pauseHint {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--c-text-mut);
+  margin: 0;
+}
+
+/* Loading spinner */
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--c-blue-dim);
+  border-top-color: var(--c-blue);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

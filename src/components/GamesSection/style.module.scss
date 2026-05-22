@@ -1,0 +1,237 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background: var(--c-bg-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.card {
+  background: var(--c-bg-card);
+  border: 1px solid var(--c-blue-dim);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--glow-blue);
+    border-color: var(--c-blue);
+  }
+}
+
+.cardPreview {
+  width: 100%;
+  height: 300px;
+  background: var(--c-bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  img {
+    height: 80%;
+    object-fit: contain;
+    transition: transform 0.5s;
+  }
+
+  .pizzaMock {
+    width: 60%;
+    height: 60%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pizzaCircle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fde68a 0%, #fbbf24 60%, #f97316 100%);
+      box-shadow: 0 0 20px rgba(251,191,36,0.4);
+    }
+
+    .pizzaBelt {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--c-blue-dim) 0px, var(--c-blue-dim) 16px,
+        transparent 16px, transparent 24px
+      );
+      opacity: 0.6;
+    }
+  }
+
+  .pongMock {
+    width: 60%;
+    height: 60%;
+    border: 2px dashed var(--c-blue-dim);
+    position: relative;
+
+    .paddleLeft, .paddleRight {
+      position: absolute;
+      width: 10px;
+      height: 60px;
+      background: var(--c-blue);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .paddleLeft { left: 10px; }
+    .paddleRight { right: 10px; background: var(--c-blue-dark); }
+
+    .ball {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: var(--c-blue-deep);
+      border-radius: 50%;
+      top: 40%;
+      left: 40%;
+    }
+  }
+}
+
+.card:hover .cardPreview img {
+  transform: scale(1.1);
+}
+
+.cardInfo {
+  padding: 30px;
+  text-align: center;
+  background: var(--c-bg-card);
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: var(--font-display, 'Inter', sans-serif);
+    color: var(--c-blue-deep);
+  }
+
+  p {
+    color: var(--c-text-lo);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Mobile: cards mais compactos para caber os 3 numa coluna */
+@media (max-width: 600px) {
+  .cardPreview {
+    height: 150px;
+  }
+  .cardInfo {
+    padding: 18px 20px;
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+}
+
+.activeGameWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  background: var(--c-bg-1);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameToolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(240,244,255,0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--c-blue-dim);
+  z-index: 101;
+  flex-shrink: 0;
+}
+
+.toolbarTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--c-blue-deep);
+
+  @media (max-width: 600px) {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+}
+
+.gameSkeleton {
+  width: 100%;
+  height: 100%;
+  background: var(--c-bg-2);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+.gameContent {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > section {
+    height: 100% !important;
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,42 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 5px;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--c-text-lo);
+  transition: background var(--dur-1), color var(--dur-1), border-color var(--dur-1);
+}
+
+.action {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--c-text-mut);
+}
+
+.pressed .kbd {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #000;
+}
